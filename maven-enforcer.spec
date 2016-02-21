@@ -4,7 +4,7 @@
 
 Name:           %{?scl_prefix}%{pkg_name}
 Version:        1.2
-Release:        8.12%{?dist}
+Release:        8.13%{?dist}
 Summary:        Maven Enforcer
 License:        ASL 2.0
 URL:            http://maven.apache.org/enforcer
@@ -13,19 +13,19 @@ BuildArch:      noarch
 
 BuildRequires:  %{?scl_prefix_java_common}maven-local
 BuildRequires:  %{?scl_prefix_java_common}mvn(commons-lang:commons-lang)
-BuildRequires:  maven30-mvn(org.apache.maven.plugin-tools:maven-plugin-annotations)
-BuildRequires:  maven30-mvn(org.apache.maven.shared:maven-common-artifact-filters)
-BuildRequires:  maven30-mvn(org.apache.maven.shared:maven-dependency-tree)
-BuildRequires:  maven30-mvn(org.apache.maven:maven-artifact)
-BuildRequires:  maven30-mvn(org.apache.maven:maven-compat)
-BuildRequires:  maven30-mvn(org.apache.maven:maven-core)
-BuildRequires:  maven30-mvn(org.apache.maven:maven-parent:pom:)
-BuildRequires:  maven30-mvn(org.apache.maven:maven-plugin-api)
-BuildRequires:  maven30-mvn(org.apache.maven:maven-project)
-BuildRequires:  maven30-mvn(org.beanshell:bsh)
-BuildRequires:  maven30-mvn(org.codehaus.plexus:plexus-container-default)
-BuildRequires:  maven30-mvn(org.codehaus.plexus:plexus-i18n)
-BuildRequires:  maven30-mvn(org.codehaus.plexus:plexus-utils)
+BuildRequires:  %{?scl_prefix}mvn(org.apache.maven.plugin-tools:maven-plugin-annotations)
+BuildRequires:  %{?scl_prefix}mvn(org.apache.maven.shared:maven-common-artifact-filters)
+BuildRequires:  %{?scl_prefix}mvn(org.apache.maven.shared:maven-dependency-tree)
+BuildRequires:  %{?scl_prefix}mvn(org.apache.maven:maven-artifact)
+BuildRequires:  %{?scl_prefix}mvn(org.apache.maven:maven-compat)
+BuildRequires:  %{?scl_prefix}mvn(org.apache.maven:maven-core)
+BuildRequires:  %{?scl_prefix}mvn(org.apache.maven:maven-parent:pom:)
+BuildRequires:  %{?scl_prefix}mvn(org.apache.maven:maven-plugin-api)
+BuildRequires:  %{?scl_prefix}mvn(org.apache.maven:maven-project)
+BuildRequires:  %{?scl_prefix}mvn(org.beanshell:bsh)
+BuildRequires:  %{?scl_prefix}mvn(org.codehaus.plexus:plexus-container-default)
+BuildRequires:  %{?scl_prefix}mvn(org.codehaus.plexus:plexus-i18n)
+BuildRequires:  %{?scl_prefix}mvn(org.codehaus.plexus:plexus-utils)
 
 %description
 Enforcer is a build rule execution framework.
@@ -58,7 +58,7 @@ This component contains the standard Enforcer Rules.
 
 %prep
 %setup -q -n enforcer-%{version}
-%{?scl:scl enable maven30 %{scl} - <<"EOF"}
+%{?scl:scl enable %{scl} - <<"EOF"}
 set -e -x
 %pom_add_dep org.apache.maven:maven-compat enforcer-rules
 
@@ -69,13 +69,13 @@ sed -e "s|<artifactId>plexus-maven-plugin</artifactId>|<artifactId>plexus-compon
 %{?scl:EOF}
 
 %build
-%{?scl:scl enable maven30 %{scl} - <<"EOF"}
+%{?scl:scl enable %{scl} - <<"EOF"}
 set -e -x
 %mvn_build -s -f
 %{?scl:EOF}
 
 %install
-%{?scl:scl enable maven30 %{scl} - <<"EOF"}
+%{?scl:scl enable %{scl} - <<"EOF"}
 set -e -x
 %mvn_install
 %{?scl:EOF}
@@ -97,6 +97,9 @@ set -e -x
 %doc LICENSE NOTICE
 
 %changelog
+* Mon Jan 11 2016 Michal Srb <msrb@redhat.com> - 1.2-8.13
+- maven33 rebuild #2
+
 * Sat Jan 09 2016 Michal Srb <msrb@redhat.com> - 1.2-8.12
 - maven33 rebuild
 
