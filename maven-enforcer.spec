@@ -4,14 +4,14 @@
 
 Name:           %{?scl_prefix}%{pkg_name}
 Version:        1.2
-Release:        8.13%{?dist}
+Release:        8.14%{?dist}
 Summary:        Maven Enforcer
 License:        ASL 2.0
 URL:            http://maven.apache.org/enforcer
 Source0:        http://repo1.maven.org/maven2/org/apache/maven/enforcer/enforcer/%{version}/enforcer-%{version}-source-release.zip
 BuildArch:      noarch
 
-BuildRequires:  %{?scl_prefix_java_common}maven-local
+BuildRequires:  %{?scl_prefix}maven-local
 BuildRequires:  %{?scl_prefix_java_common}mvn(commons-lang:commons-lang)
 BuildRequires:  %{?scl_prefix}mvn(org.apache.maven.plugin-tools:maven-plugin-annotations)
 BuildRequires:  %{?scl_prefix}mvn(org.apache.maven.shared:maven-common-artifact-filters)
@@ -97,6 +97,9 @@ set -e -x
 %doc LICENSE NOTICE
 
 %changelog
+* Mon Feb 08 2016 Michal Srb <msrb@redhat.com> - 1.2-8.14
+- Fix BR on maven-local & co.
+
 * Mon Jan 11 2016 Michal Srb <msrb@redhat.com> - 1.2-8.13
 - maven33 rebuild #2
 
